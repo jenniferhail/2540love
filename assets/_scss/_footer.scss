@@ -1,0 +1,42 @@
+#site-footer {
+	padding-top: 35px;
+}
+#copyright {
+	clear: both;
+	text-align: center;
+	padding: 55px 0;
+	a {
+		color: $link;	
+		&:focus,
+		&:hover {
+			text-decoration: underline;	
+		}
+	}
+}
+.footer-nav {
+	display: inline-block;
+	float: left;
+	text-align: left;
+	width: 20%;
+	span {
+		font-family: $headings;
+		font-size: 14px;
+		text-transform: uppercase;
+	}
+	ul {
+		list-style: none;	
+		padding-top: 10px;
+		margin: 0;
+	}
+	li {
+	}
+}
+.mailing-list {
+	p {
+		padding-top: 10px;
+		font-style: italic;
+	}
+	input {
+		width: 180px;
+	}
+}

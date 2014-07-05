@@ -1,0 +1,12 @@
+<div class="page-title">
+    <h2>{{ page.title }}</h2>
+</div>
+<div id="content">
+    {% if page.content == null %}
+        <div class="not-found">
+            <h2>Coming soon...</h2>
+        </div>
+    {% else %}
+        {{ page.content }}
+    {% endif %}
+</div><!-- #content -->

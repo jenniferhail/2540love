@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+	<!-- Basic page needs
+	================================================== -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	
+	<!-- Title, description, favicon
+	================================================== -->
+	<title>
+	{{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+	</title>
+	
+	{% if page_description %}
+	<meta name="description" content="{{ page_description | escape }}">
+	{% endif %}
+	
+	<link rel="shortcut icon" type="image/x-icon" href=" {{ 'favicon.ico' | asset_url }}">
+  	
+  	
+  	<!-- Social media open graph
+  	================================================== -->
+  	{% include 'open-graph' %}
+  
+  
+	<!-- Helpers
+	================================================== -->
+	<link rel="canonical" href="{{ canonical_url }}">
+	<meta name="viewport" content="width=device-width">
+	
+	
+	<!-- CSS files
+	================================================== -->
+	{{ 'style.css' | asset_url | stylesheet_tag }}
+
+	
+	<!-- Header hook for plugins
+	================================================== -->
+	{{ content_for_header }}
+	
+	
+	<!-- JS files
+	================================================== -->
+	<!--[if lt IE 9]>
+	{{ '//html5shiv.googlecode.com/svn/trunk/html5.js' | script_tag }}
+	<![endif]-->
+	
+	{% if template contains 'customers' %}
+	    {{ "shopify_common.js" | shopify_asset_url | script_tag }}
+	    {{ "customer_area.js"  | shopify_asset_url | script_tag }}
+	{% endif %}
+	
+	<script type="text/javascript">
+	Shopify.money_format = "{{ shop.money_format }}";
+	Shopify.currency = "{{ shop.currency }}";
+	</script>
+    
+    {% comment %}
+      Theme dependent JS is loaded at the very bottom of this file for performance reasons
+    {% endcomment %}
+	{{ '//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js' | script_tag }}
+	{{ 'api.jquery.js' | shopify_asset_url | script_tag }}
+</head>
+
+<body id="{% if template == 'index' }}home
+	{% elsif template contains 'product' %}product
+	{% elsif template contains 'collection' %}collection
+	{% elsif template contains 'article' %}article
+	{% elsif template contains 'blog' %}blog
+	{% else %}{{page.handle }}{% endif %}" 
+	{% if template contains 'product' %}class="product-{{ product.handle }}"{% elsif template contains 'collection' %}class="collection-{{ collection.handle }}"{% endif %}>
+ 
+	<header class="clearfix">
+	
+		<div class="wrapper">
+
+			<div class="logo">
+				<a href="/" class="shop_logo">
+					<img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" class="png_bg" />
+				</a>
+			</div> <!-- /.logo -->
+
+			<div class="top-bar clearfix">
+
+				<nav class="account-links">
+					<ul class="customer">
+					{% if shop.customer_accounts_enabled %}
+						{% if customer %}
+							<li>
+								<a href="/account">My Account</a>
+							</li>
+							<li>
+								{{ 'Logout' | customer_logout_link }}
+							</li>
+						{% else %}
+							{% if shop.customer_accounts_optional %}
+								<li>
+									{{ 'Sign Up' | customer_register_link }}
+								</li>
+						{% endif %}
+						<li>
+							{{ 'Login' | customer_login_link }}
+						</li>
+						{% endif %}
+					{% endif %}
+					</ul>
+				</nav>
+
+				<div class="cart-summary">
+					<a href="/cart">
+						Cart (<span class="cart-total-items">{{ cart.item_count }}</span>)
+					</a>
+				</div>
+
+				<div class="social-links">
+					<ul>
+						<li class="social-link pinterest">
+							<a href="http://pinterest.com/{{ settings.pinterest }}" target="_blank"><i class="icon-pinterest"></i></a>
+						</li>						
+						<li class="social-link facebook">
+							<a href="https://www.facebook.com/{{ settings.facebook }}" target="_blank"><i class="icon-facebook"></i></a>
+						</li>
+						<li class="social-link twitter">
+							<a href="https://twitter.com/{{ settings.twitter }}" target="_blank"><i class="icon-twitter"></i></a>
+						</li>
+						<li class="social-link email">
+							<a href="mailto:{{ shop.email }}" target="_blank"><i class="icon-mail"></i></a>
+						</li>	
+					</ul>				
+				</div>
+
+					
+			<nav class="page-menu">
+				<ul>
+					{% for link in linklists.main-menu.links %}
+						{% if linklists[link.handle] == empty %}
+							<li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}><span>{{ link.title }}</span></a></li>
+						{% else %}
+							<li class="dropdown title"><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}><span>{{ link.title }}</span></a>
+						  		<ul class="dropdown list">
+						    		{% for link in linklists[link.handle].links %}
+						    			<li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
+						   			 {% endfor %}
+						  		</ul>
+							</li>
+						{% endif %}
+					{% endfor %}
+
+				</ul>
+			</nav>
+
+			</div><!-- /top-bar -->
+
+		</div> <!-- end wrapper -->
+	</header>
+
+	<section id="body" class="wrapper">
+		<div class="sidebar">
+			{% if template == 'index' %}
+
+			{% elsif template contains 'collections' or 'product' %}
+				{% include 'sidebar' %}
+			{% elsif template contains 'blog' or 'article' %}
+				{% include 'sidebar-blog' %}
+			{% endif %}
+		</div>
+		<div class="main">
+			{{ content_for_layout }}
+		</div>
+	</section> <!-- /#body -->
+    
+	<footer class="clearfix">
+		<div class="wrapper">
+			
+			<div class="footer-nav mailing-list">
+				<span>Mailing List</span>
+				<p>Stay up to date with news and events:</p>
+				<form>
+					<input type="email" value="" placeholder="type email + enter" name="EMAIL" />
+				</form>
+
+				<div class="social-links">
+					<ul>
+						<li class="social-link pinterest">
+							<a href="http://pinterest.com/{{ settings.pinterest }}" target="_blank"><i class="icon-pinterest"></i></a>
+						</li>						
+						<li class="social-link facebook">
+							<a href="https://www.facebook.com/{{ settings.facebook }}" target="_blank"><i class="icon-facebook"></i></a>
+						</li>
+						<li class="social-link twitter">
+							<a href="https://twitter.com/{{ settings.twitter }}" target="_blank"><i class="icon-twitter"></i></a>
+						</li>
+						<li class="social-link email">
+							<a href="mailto:{{ shop.email }}" target="_blank"><i class="icon-mail"></i></a>
+						</li>	
+					</ul>				
+				</div>
+			</div>
+			<div class="footer-nav">
+				<span>Contact Us</span>
+				<nav>
+					<ul>
+						<li>Phone: 888-123-4567</li>
+						<li><a href="mailto:{{ shop.email }}" target="_blank">{{ shop.email }}</a></li>
+					</ul>
+				</nav>
+			</div>			
+			<div class="footer-nav">
+				<span>Charities</span>
+				<nav>
+					<ul>
+					{% for link in linklists.charities-footer.links %}
+						<li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
+					{% endfor %}
+					</ul>
+				</nav>
+			</div>
+			<div class="footer-nav">
+				<span>Shop</span>
+				<nav>					
+					<ul>
+					{% for link in linklists.products.links %}
+						<li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
+					{% endfor %}
+					</ul>
+				</nav>
+			</div>
+			<div class="footer-nav">
+				<span>Help</span>
+				<nav>									
+					<ul>
+					{% for link in linklists.help.links %}
+						<li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
+					{% endfor %}
+					</ul>
+				</nav>
+			</div>
+
+			<div id="copyright">
+				Copyright {{ 'now' | date: "%Y" }} {{ shop.name }}. All rights reserved. Site by <a href="http://jenniferhail.com" target="_blank" rel="nofollow">Jennifer Hail</a>	
+			</div>		
+				
+		</div><!-- end wrapper -->
+	</footer>
+
+	{% comment %}
+	  Theme dependent JavaScript.
+	{% endcomment %}  
+	{{ 'jquery.cookie.js' | asset_url | script_tag }}
+	{{ 'jquery.bxslider.min.js' | asset_url | script_tag }}
+	{{ 'jquery.selectbox-0.2.min.js' | asset_url | script_tag }}
+	{{ 'jquery.fancybox.pack.js' | asset_url | script_tag }}
+	{{ 'option_selection.js' | shopify_asset_url | script_tag }}
+	{{ 'ajaxify.js' | asset_url | script_tag }}
+	{{ 'shop.js' | asset_url | script_tag }}
+</body>
+</html>

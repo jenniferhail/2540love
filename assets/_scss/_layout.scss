@@ -1,0 +1,30 @@
+* {
+	box-sizing: border-box;
+}
+body {
+	background: $bg; 
+	width: $width-outer;
+	max-width: $width-max;
+	margin: 0 auto;
+}
+.wrapper {
+	width: $width;
+	margin: 0 auto;
+	@extend %clearfix;
+}
+
+#content,
+#template,
+#cart {
+	padding: 34px 0;
+	min-height: 400px;
+}
+
+#template.centered {
+	text-align: center;
+	form {
+		width: 300px;
+		margin: 0 auto;
+		text-align: left;
+	}
+}

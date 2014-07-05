@@ -1,0 +1,98 @@
+.logo {
+	text-align: left;
+	float: left;
+	width: 30%;
+}
+.top-bar {
+	width: 70%;
+	height: 40px;
+	@extend %clearfix;
+	text-align: right;
+	float: right;
+	.account-links {
+		float: right;
+		ul {
+			list-style: none;
+			margin-bottom: auto;
+			li {
+				display: inline-block;
+			}
+		}
+	}
+	.cart-summary {
+		float: right;
+		margin-right: 15px;
+	}
+	a {
+		display: inline-block;
+		vertical-align: middle;
+		//margin-left: 30px;
+		font-size: 11px;
+		text-transform: uppercase;	
+		letter-spacing: 1px;
+		padding: 7px 0px 0px 0px;
+		font-family: $headings;
+		&.cart-link {
+			//background: url('icon-cart.png') no-repeat;	
+		}
+	}
+}
+.page-menu {
+	float: right;
+	text-align: left;
+	padding-top: 30px;
+	ul {
+		list-style: none;	
+		margin: 0;
+	}
+	li {
+		display: inline-block;
+		margin-left: 20px;
+	}
+	a {
+		text-transform: uppercase;
+		font-size: 18px;
+		font-weight: 300;
+		letter-spacing: 1px;
+		font-family: $headings;
+	}
+	.dropdown {
+		li {
+
+		}
+		ul {
+			display: none;
+			margin-left: -20px;
+			width: 110px;
+			&:hover {
+				display: block;
+			}
+		}
+	}
+}
+.social-links {
+	clear: both;
+	ul {
+		list-style: none;
+	}
+	li {
+		margin-left: 0;
+		display: inline-block;
+		a {
+			vertical-align: middle;
+			overflow: hidden;
+			font-size: 24px;
+			color: $grey;
+			&:focus,
+			&:hover {
+				color: #000;	
+			}
+		}
+	}
+}
+nav a {
+	&.current,
+	li.active & {
+		color: $hover;
+	}
+}
