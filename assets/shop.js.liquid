@@ -57,3 +57,26 @@ jQuery(document).ready(function($){
   });
 
 });
+
+jQuery(document).ready(function($){
+  
+  // Updated to hide the content areas with jQuery rather than CSS
+  $('ul.dropdown.list').hide();
+  
+  // Selecting the appropriate widgets using our newly added class
+  // The action is actually on the click on the title, so that's what we're ultimately selecting
+  $('.dropdown span.title').click( function(e) {
+    e.preventDefault();
+    
+    // We're using $(this) to ensure that the title click is only impacting its own widget
+    // And the .next() ensures that we're impacting the immediately following sibling
+    $(this).parent().siblings('.list').animate({
+      
+      // The combo of height and opacity gives a nice open-and-fade effect
+      height: 'toggle',
+      opacity: 'toggle',
+  
+    });
+  });
+  
+});

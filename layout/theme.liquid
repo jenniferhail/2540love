@@ -162,11 +162,9 @@
 
 	<section id="body" class="wrapper">
 		<div class="sidebar">
-			{% if template == 'index' %}
-
-			{% elsif template contains 'collections' or 'product' %}
+			{% if template contains 'collections' or template contains 'product' %}
 				{% include 'sidebar' %}
-			{% elsif template contains 'blog' or 'article' %}
+			{% elsif template contains 'blog' or template contains 'article' %}
 				{% include 'sidebar-blog' %}
 			{% endif %}
 		</div>
@@ -206,7 +204,7 @@
 				<span>Contact Us</span>
 				<nav>
 					<ul>
-						<li>Phone: 888-123-4567</li>
+						<li>Phone: {% assign phone = shop.phone | split: '' %}{{ phone[0] }}{{ phone[1] }}{{ phone[2] }}-{{ phone[3] }}{{ phone[4] }}{{ phone[5] }}-{{ phone[6] }}{{ phone[7] }}{{ phone[8] }}{{ phone[9] }}</li>
 						<li><a href="mailto:{{ shop.email }}" target="_blank">{{ shop.email }}</a></li>
 					</ul>
 				</nav>

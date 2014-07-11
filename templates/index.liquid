@@ -1,3 +1,28 @@
+<div class="announcements">
+
+</div>
+
+<div class="slider-container">
+    {% assign number_of_slides = 7 %}
+    <ul id="slider">
+        {% for i in (1..number_of_slides) %}
+            {% capture slide_enabled %}slideshow_{{ i }}_active{% endcapture %}
+            {% capture slide_image %}slideshow_{{ i }}.jpg{% endcapture %}
+            {% capture slide_image_alt %}slideshow_{{ i }}_alt{% endcapture %}
+            {% capture slide_link %}image_{{ i }}_link{% endcapture %}
+            {% if settings[slide_enabled] %}
+                <li class="slide">
+                    <img src="{{ slide_image | asset_url }}" data-url="{{ settings[slide_link] }}" alt="{{ settings[slide_image_alt] }}" class="slide-img" />
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    <div id="slider-empty" class="not-found">
+        <h2>No slides found</h2>
+    </div>
+</div><!-- /.slider-container -->
+
 <div class="features">
 	<div class="feature-box">
 		{% if settings.tb_image_link != '' %}
@@ -34,45 +59,4 @@
 		{% endif %}
 		
 	</div>
-	<div class="feature-box">
-		{% if settings.bb_image_link != '' %}
-			<a href="{{ settings.bb_image_link }}">
-			<img src="{{ 'bb_image.jpg' | asset_url }}" />
-			<div class="box-caption">
-			 	<h3>{{ settings.bb_header }}</h3>
-			</div>
-			</a>
-			
-		{% else %}
-			<img src="{{ 'bb_image.jpg' | asset_url }}" />
-			<div class="box-caption">
-			 	<h3>{{ settings.bb_header }}</h3>
-			</div>
-		{% endif %}
-		
-	</div>
-</div>
-<div class="slider-container">
-    {% assign number_of_slides = 7 %}
-    <ul id="slider">
-        {% for i in (1..number_of_slides) %}
-            {% capture slide_enabled %}slideshow_{{ i }}_active{% endcapture %}
-            {% capture slide_image %}slideshow_{{ i }}.jpg{% endcapture %}
-            {% capture slide_image_alt %}slideshow_{{ i }}_alt{% endcapture %}
-            {% capture slide_link %}image_{{ i }}_link{% endcapture %}
-            {% if settings[slide_enabled] %}
-                <li class="slide">
-                    <img src="{{ slide_image | asset_url }}" data-url="{{ settings[slide_link] }}" alt="{{ settings[slide_image_alt] }}" class="slide-img" />
-                </li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-
-    <div id="slider-empty" class="not-found">
-        <h2>No slides found</h2>
-    </div>
-</div><!-- /.slider-container -->
-
-<div class="announcements">
-
 </div>

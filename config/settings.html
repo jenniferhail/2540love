@@ -17,12 +17,31 @@
 </fieldset>
 
 <fieldset>
+  <legend>Logo</legend>
+  <table>
+    <tr>
+      <th><label for="logo">Logo</label></th>
+      <td>
+        <input type="file" id="logo" name="logo.png" data-max-width="300" />
+      </td>
+    </tr>
+  </table>
+</fieldset>
+
+<fieldset>
   <legend>Home Page Content Blocks</legend>
   For best results, upload images that are 330px wide by 192px tall.
   <table>
   	<table>
+      <tr>
+        <td colspan="2">Wide Text Block</td>
+      </tr>
+      <tr>
+        <th><label for="wtb_content">Content</label></th>
+        <td><textarea name="wtb_content"></textarea></td>
+      </tr>
   		<tr>
-  		  <td colspan="2">Top Block</td>
+  		  <td colspan="2">Left Image Block</td>
   		</tr>
   	  <tr>
   	    <th><label for="tb_header">Label</label></th>
@@ -44,7 +63,7 @@
   	  	<td colspan="2">&nbsp;</td>
   	  </tr>
   	<tr>
-  	  <td colspan="2">Middle Block</td>
+  	  <td colspan="2">Right Caption Block</td>
   	</tr>
   	  <tr>
   	    <th><label for="mb_header">Label</label></th>
@@ -62,38 +81,6 @@
   	    <td>
   	      <input type="text" id="mb_image_link" name="mb_image_link" value="" />
   	    </td>
-  	  </tr>
-  	  <tr>
-  	  	<td colspan="2">&nbsp;</td>
-  	  </tr>
-  	  <tr>
-  	    <td colspan="2">Bottom Block</td>
-  	  </tr>
-  	  <tr>
-  	    <th><label for="bb_header">Label</label></th>
-  	    <td><input type="text" id="bb_header" name="bb_header" maxlength="40" /></td>
-  	  </tr>
-  	  <tr>
-  	    <th><label for="bb_image">Image</label></th>
-  	    <td>
-  	      <input type="file" id="bb_image" name="bb_image.jpg" data-max-width="330" />
-  	    </td>
-  	  </tr>
-  	  <tr>
-  	    <th><label for="bb_image_link">Link to URL:</label></th>
-  	    <td>
-  	      <input type="text" id="bb_image_link" name="bb_image_link" value="" />
-  	    </td>
-  	  </tr>
-  	  <tr>
-  	  	<td colspan="2">&nbsp;</td>
-  	  </tr>
-  	  <tr>
-  	    <td colspan="2">Mailing List</td>
-  	  </tr>
-  	  <tr>
-  	    <th><label for="mc_label">Label</label></th>
-  	    <td><input type="text" id="mc_label" name="mc_label" maxlength="65" /></td>
   	  </tr>
   	</table>
   </table>

@@ -272,18 +272,16 @@ a:hover {
   display: none;
 }
 
-{% if settings.logo_image == "logo.png" %}
 #logo {
   width: 100%;
   height: 200px;
-  background-image: url({{ settings.logo_image | asset_url }});
+  background-image: url(logo.png);
   background-repeat: no-repeat;
   background-position: 0 85%;
   background-size: auto 200px;
 }
 
 #tagline { display: none; }
-{% endif %}
 
 
 
@@ -364,7 +362,7 @@ a:hover {
   text-align: center;
   vertical-align: top;
   padding: 4px;
-  border: dotted 1px #ccc
+  border: dotted 1px #ccc;
 }
 
 #thumbs div {
@@ -372,7 +370,8 @@ a:hover {
   width: 100%!important;
   height: auto!important;
   border: none;
-  margin: 0 0 10px 0; padding: 0;
+  margin: 0 0 10px 0; 
+  padding: 0;
 }
 
 #thumbs img {
